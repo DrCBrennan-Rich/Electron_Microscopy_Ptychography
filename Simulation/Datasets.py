@@ -8,6 +8,17 @@ plt.rcParams.update({'font.size': 40})
 
 from Physics.Microscope import MicroscopeForward
 
+def Add_Poisson_Noise(Intensity, Dose):
+    
+    if Dose <= 0:
+        raise ValueError("A dose must be positive.")
+    
+    ExpectedCounts = Dose*Intensity
+    
+    Intensity = np.random.poisson(ExpectedCounts)/Dose
+    
+    return Intensity
+
 def Simulate_Ptychography(obj, Probe, ScanPositions, MicroscopeInstance,
                           Dose = None):
 
@@ -26,9 +37,7 @@ def Simulate_Ptychography(obj, Probe, ScanPositions, MicroscopeInstance,
         
         if Dose is not None:
 
-           ExpectedCounts = Dose*Intensity
-
-           Intensity = np.random.poisson(ExpectedCounts)/Dose
+           Intensity = Add_Poisson_Noise(Intensity, Dose)
 
         DiffractionPatterns.append(Intensity)
 
@@ -45,3 +54,4 @@ def Make_Scan_Positions(ObjectSize, ProbeSize, Step):
             ScanPositions.append((x, y))
 
     return ScanPositions
+
