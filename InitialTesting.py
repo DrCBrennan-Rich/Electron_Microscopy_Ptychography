@@ -7,7 +7,8 @@ import matplotlib.pyplot as plt
 plt.rcParams.update({'font.size': 40})
 
 from Physics.Microscope import Microscope, MicroscopeForward
-from Reconstruction.ePIE import ePIE, rPIE
+from Reconstruction.ePIE import ePIE
+from Reconstruction.rPIE import rPIE
 from Simulation.Objects import Make_Amplitude, Make_Phase
 from Simulation.Probes import Make_Probe
 from Analysis.Metrics import Reconstruction_Error, Align_Global_Phase, Consistency_Error
