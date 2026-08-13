@@ -105,3 +105,108 @@ def Make_Phase(Size, ObjectSize):
     Phase[:, End:] = 0
 
     return Phase
+
+
+def Extract_Object_Patch(Object, x, y, ProbeSize):
+
+    #Integer part of the position
+    x0 = int(np.floor(x))
+    y0 = int(np.floor(y))
+
+    #Fractional part
+    dx = x - x0
+    dy = y - y0
+    
+    #Extra content around the probe
+    Padding = 2
+    
+    #Half-width of the probe
+    HalfWidth = ProbeSize//2
+    
+    #Extract object patch
+    ObjectPatch = Object[x0-HalfWidth-Padding:x0+HalfWidth+Padding+1, 
+                         y0-HalfWidth-Padding:y0+HalfWidth+Padding+1 ].copy()
+
+
+    PatchSize = ObjectPatch.shape[0]
+    # Fourier frequencies
+    FX = np.fft.fftfreq(PatchSize)
+    FY = np.fft.fftfreq(PatchSize)
+
+    FX, FY = np.meshgrid(FX, FY, indexing="ij")
+
+    #Fourier shift
+    Shift = np.exp(-2j*np.pi*(FX*dx + FY*dy))
+    
+    ShiftedPatch = np.fft.ifft2(np.fft.fft2(ObjectPatch)*Shift)
+    
+    # Extract central probe-sized region
+    Start = Padding
+    End = Padding + ProbeSize
+
+    ObjectPatch = ShiftedPatch[Start:End, Start:End]
+
+    return ObjectPatch
+
+
+def Insert_Object_Patch(
+        Object,
+        PatchUpdate,
+        x,
+        y,
+        ProbeSize):
+
+    # Integer part of position
+    x0 = int(np.floor(x))
+    y0 = int(np.floor(y))
+
+    # Fractional part
+    dx = x - x0
+    dy = y - y0
+
+    # Extra content around the probe
+    Padding = 2
+
+    # Half-width of probe
+    HalfWidth = ProbeSize // 2
+
+    # Size of larger patch
+    PatchSize = ProbeSize + 2*Padding
+
+    # Fourier frequencies
+    FX = np.fft.fftfreq(PatchSize)
+    FY = np.fft.fftfreq(PatchSize)
+
+    FX, FY = np.meshgrid(FX, FY, indexing="ij")
+
+    # Adjoint Fourier shift
+    Shift = np.exp(
+        +2j*np.pi*(FX*dx + FY*dy)
+    )
+
+    # Put probe-sized update into centre of larger patch
+    LargePatchUpdate = np.zeros(
+        (PatchSize, PatchSize),
+        dtype=complex
+    )
+
+    Start = Padding
+    End = Padding + ProbeSize
+
+    LargePatchUpdate[
+        Start:End,
+        Start:End
+    ] = PatchUpdate
+
+    # Apply adjoint Fourier shift
+    LargePatchUpdate = np.fft.ifft2(
+        np.fft.fft2(LargePatchUpdate) * Shift
+    )
+
+    # Insert into full object
+    Object[
+        x0-HalfWidth-Padding:x0+HalfWidth+Padding+1,
+        y0-HalfWidth-Padding:y0+HalfWidth+Padding+1
+    ] += LargePatchUpdate
+
+    return Object
