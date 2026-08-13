@@ -7,6 +7,7 @@ import matplotlib.pyplot as plt
 plt.rcParams.update({'font.size': 40})
 from Physics.Microscope import MicroscopeForward, MicroscopeBackward
 from Analysis.Metrics import Reconstruction_Error, Consistency_Error
+from Simulation.Objects import  Extract_Object_Patch
 
 def rPIE(ObjectGuess,
          ProbeGuess,
@@ -32,7 +33,7 @@ def rPIE(ObjectGuess,
 
         for Position,(x,y) in enumerate(ScanPositions):
 
-            ObjectPatch = ObjectGuess[x:x+ProbeSize,y:y+ProbeSize].copy()
+            ObjectPatch = Extract_Object_Patch(ObjectGuess,x,y,ProbeSize)
             
             ObjectMaximum = np.max(np.abs(ObjectPatch)**2)
             
