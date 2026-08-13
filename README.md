@@ -18,3 +18,13 @@ The scanning positions (including subpixel shifts) are produced by Simulation\Sc
 The microscope physics and the modelling of the electron wave propagation from lens to detector can be found in Physics\Microscope.py and Physics\Propogator.py respectively.
 
 Error calculations (both cross referencing to the known object, as well as experimental consistency error functions) can be found in Analysis/Metrics.py
+
+The reconstruction models implimenting the ePIE and rPIE algorithms can be found in Reconstruction/ePIE.py and Reconstruction/rPIE.py.
+
+Further reconstruction models are planned. A checklist of planned features yet to be implemented (in rough order of importance):
+
+Aberration effects on the microscope model
+Probe location reconstruction with jitter present
+Multi-experiment comparisons
+
+
