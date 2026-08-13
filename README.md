@@ -11,4 +11,4 @@ Then, the update parameters for the retrieval algorithm (currently either ePIE o
 
 Finally, the number of iterations (typically ~ 500) can be selected.
 
-Object amplitude and phase creation is handled by Simulation\Object.py 
+Object and probe amplitude and phase creation is handled by Simulation\Object.py and Simulation\Probes.py respectively.
