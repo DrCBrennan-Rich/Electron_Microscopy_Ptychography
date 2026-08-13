@@ -7,6 +7,7 @@ import matplotlib.pyplot as plt
 plt.rcParams.update({'font.size': 40})
 
 from Physics.Microscope import MicroscopeForward
+from Simulation.Objects import  Extract_Object_Patch
 
 def Add_Poisson_Noise(Intensity, Dose):
     
@@ -19,15 +20,15 @@ def Add_Poisson_Noise(Intensity, Dose):
     
     return Intensity
 
-def Simulate_Ptychography(obj, Probe, ScanPositions, MicroscopeInstance,
+def Simulate_Ptychography(Object, Probe, ScanPositions, MicroscopeInstance,
                           Dose = None):
 
     DiffractionPatterns = []
     psize = Probe.shape[0]
 
-    for x,y in ScanPositions:
+    for Position, (x, y) in enumerate(ScanPositions):
 
-        ObjectPatch = obj[x:x+psize, y:y+psize]
+        ObjectPatch = Extract_Object_Patch(Object,x,y,psize)
 
         ExitWave = ObjectPatch*Probe
 
@@ -43,15 +44,23 @@ def Simulate_Ptychography(obj, Probe, ScanPositions, MicroscopeInstance,
 
     return np.array(DiffractionPatterns)
 
-
-def Make_Scan_Positions(ObjectSize, ProbeSize, Step):
+'''
+def Make_Scan_Positions(ObjectSize, ProbeSize, Step, Jitter = 0):
 
     ScanPositions = []
 
     for x in range(0, ObjectSize-ProbeSize+1, Step):
         for y in range(0, ObjectSize-ProbeSize+1, Step):
-
-            ScanPositions.append((x, y))
+            
+            #Create the jitter value centered on 0
+            JitterX = np.random.normal(0, Jitter)
+            JitterY = np.random.normal(0, Jitter)
+            
+            PositionX = x + JitterX
+            PositionY = y + JitterY
+            
+            ScanPositions.append((PositionX, PositionY))
 
     return ScanPositions
 
+'''
