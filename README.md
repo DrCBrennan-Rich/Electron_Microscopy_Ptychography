@@ -10,3 +10,5 @@ After this, a step and probe size has to be selected for the simulated probe tha
 Then, the update parameters for the retrieval algorithm (currently either ePIE or rPIE) Beta for the object nad BetaProbe for the probe are assigned.
 
 Finally, the number of iterations (typically ~ 500) can be selected.
+
+Object amplitude and phase creation is handled by Simulation\Object.py 
