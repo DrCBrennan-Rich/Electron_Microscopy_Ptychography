@@ -16,3 +16,5 @@ Object and probe amplitude and phase creation is handled by Simulation\Object.py
 The scanning positions (including subpixel shifts) are produced by Simulation\Scanning.py and then are used to simulate a complete set of diffraction patterns to use in the ptychography by Simulation\Datasets.py
 
 The microscope physics and the modelling of the electron wave propagation from lens to detector can be found in Physics\Microscope.py and Physics\Propogator.py respectively.
+
+Error calculations (both cross referencing to the known object, as well as experimental consistency error functions) can be found in Analysis/Metrics.py
