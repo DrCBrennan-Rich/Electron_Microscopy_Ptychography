@@ -7,6 +7,7 @@ import matplotlib.pyplot as plt
 plt.rcParams.update({'font.size': 40})
 from Physics.Microscope import MicroscopeForward, MicroscopeBackward
 from Analysis.Metrics import Reconstruction_Error, Consistency_Error
+from Simulation.Objects import  Extract_Object_Patch, Insert_Object_Patch
 
 def ePIE(ObjectGuess,
          ProbeGuess,
@@ -26,7 +27,7 @@ def ePIE(ObjectGuess,
 
         for Position,(x,y) in enumerate(ScanPositions):
 
-            ObjectPatch = ObjectGuess[x:x+ProbeSize,y:y+ProbeSize].copy()
+            ObjectPatch = Extract_Object_Patch(ObjectGuess,x,y,ProbeSize)
 
             ExitWave = ProbeGuess*ObjectPatch
 
@@ -39,14 +40,22 @@ def ePIE(ObjectGuess,
             ExitWaveUpdated = MicroscopeBackward(DetectorWaveUpdated, Microscope)
 
             Difference = ExitWaveUpdated - ExitWave
-
-            # ePIE object update
-            ObjectGuess[x:x+ProbeSize,y:y+ProbeSize] += (
-                Beta*np.conj(ProbeGuess)/np.max(np.abs(ProbeGuess)**2)*Difference)
             
+            # Object update
+            ProbeMaximum = np.max(np.abs(ProbeGuess)**2)
+            
+            ObjectUpdate = (
+                Beta*np.conj(ProbeGuess)/(ProbeMaximum+1E-15)*Difference)
+            
+            ObjectGuess = Insert_Object_Patch(ObjectGuess, ObjectUpdate, 
+                                              x, y, ProbeSize)
+
             # Probe update
+            ObjectMaximum = np.max(np.abs(ObjectPatch)**2)
+
             ProbeGuess += (
-                BetaProbe*np.conj(ObjectPatch)/np.max(np.abs(ObjectPatch)**2)*Difference)
+                BetaProbe*np.conj(ObjectPatch)/(ObjectMaximum+1E-15)*Difference)
+            
 
         # Plot progress
         if Iteration %((Iterations+1)//3) == 0:
