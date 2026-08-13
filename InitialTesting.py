@@ -11,12 +11,13 @@ from Reconstruction.ePIE import ePIE
 from Reconstruction.rPIE import rPIE
 from Simulation.Objects import Make_Amplitude, Make_Phase
 from Simulation.Probes import Make_Probe
+from Simulation.Scanning import Make_Scan_Positions
 from Analysis.Metrics import Reconstruction_Error, Align_Global_Phase, Consistency_Error
-from Simulation.Datasets import Simulate_Ptychography, Make_Scan_Positions
+from Simulation.Datasets import Simulate_Ptychography
 
 
 ########   Simulation parameters   ########
-
+np.random.seed(420)
 
 #Total image size and internal object size
 N = 75               
@@ -73,7 +74,7 @@ plt.show()
 ########   Create the probe   ########
 
 
-ScanPositions = Make_Scan_Positions(N, ProbeSize, Step)
+ScanPositions = Make_Scan_Positions(Object.shape[0], ProbeSize, Step)
 
 Probe = Make_Probe(ProbeSize, 4)
 
@@ -99,7 +100,7 @@ Probe = Make_Probe(ProbeSize, 4)
 
 
 
-Patterns = Simulate_Ptychography(Object, Probe, ScanPositions, MicroscopeInstance, Dose =10)
+Patterns = Simulate_Ptychography(Object, Probe, ScanPositions, MicroscopeInstance, Dose =10000)
 
 ObjectFourier = np.fft.fft2(Object)
 
