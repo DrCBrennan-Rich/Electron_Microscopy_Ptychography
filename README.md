@@ -12,3 +12,5 @@ Then, the update parameters for the retrieval algorithm (currently either ePIE o
 Finally, the number of iterations (typically ~ 500) can be selected.
 
 Object and probe amplitude and phase creation is handled by Simulation\Object.py and Simulation\Probes.py respectively.
+
+The scanning positions (including subpixel shifts) are produced by Simulation\Scanning.py and then are used to simulate a complete set of diffraction patterns to use in the ptychography by Simulation\Datasets.py
