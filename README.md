@@ -24,7 +24,9 @@ The reconstruction models implimenting the ePIE and rPIE algorithms can be found
 Further reconstruction models are planned. A checklist of planned features yet to be implemented (in rough order of importance):
 
 Aberration effects on the microscope model
+
 Probe location reconstruction with jitter present
+
 Multi-experiment comparisons
 
 
