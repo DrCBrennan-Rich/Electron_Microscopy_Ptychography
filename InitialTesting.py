@@ -16,7 +16,8 @@ from Analysis.Metrics import Reconstruction_Error, Align_Global_Phase, Consisten
 from Simulation.Datasets import Simulate_Ptychography
 
 ########   Simulation parameters   ########
-np.random.seed(420)
+#Select a random seed to create comparible results between runs
+np.random.seed(42)
 
 #Total image size and internal object size
 N = 75               
