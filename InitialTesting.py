@@ -15,7 +15,6 @@ from Simulation.Scanning import Make_Scan_Positions
 from Analysis.Metrics import Reconstruction_Error, Align_Global_Phase, Consistency_Error
 from Simulation.Datasets import Simulate_Ptychography
 
-
 ########   Simulation parameters   ########
 np.random.seed(420)
 
