@@ -19,10 +19,10 @@ Object = np.zeros((N, N))
 start = (N - Object_size) // 2
 end = start + Object_size
 
-#Put a simple Objectect in the centre
+#Put a simple object in the centre
 Object[start:end, start:end] = 1
 
-#Add some structure
+#Add structure
 Object[N//2+4,N//2+4] = 2
 Object[N//2+4,N//2+6] = 2
 Object[N//2+6,N//2+5] = 10
