@@ -57,17 +57,17 @@ Image0 = ax[0,0].imshow(Object, cmap="inferno", interpolation="nearest")
 ax[0,0].set_title("Objectect")
 plt.colorbar(Image0, ax=ax[0,0])
 
-# Fourier amplitude
+#Fourier amplitude
 Image1 = ax[0,1].imshow(AmplitudeDisplay, cmap="inferno")
 ax[0,1].set_title("Fourier Amplitude")
 plt.colorbar(Image1, ax=ax[0,1])
 
-# Fourier phase
+#Fourier phase
 Image2 = ax[1,0].imshow(PhaseDisplay, cmap="twilight")
 ax[1,0].set_title("Fourier Phase")
 plt.colorbar(Image2, ax=ax[1,0])
 
-# Diffraction intensity
+#Diffraction intensity
 Image3 = ax[1,1].imshow(np.log1p(IntensityDisplay), cmap="inferno")
 ax[1,1].set_title("Diffraction Intensity (log scale)")
 plt.colorbar(Image3, ax=ax[1,1])
