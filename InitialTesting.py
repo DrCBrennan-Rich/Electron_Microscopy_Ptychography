@@ -7,6 +7,7 @@ import matplotlib.pyplot as plt
 plt.rcParams.update({'font.size': 40})
 
 from Physics.Microscope import Microscope, MicroscopeForward
+from Physics.PhysicalConversions import Voltage_To_Wavelength
 from Reconstruction.ePIE import ePIE
 from Reconstruction.rPIE import rPIE
 from Simulation.Objects import Make_Amplitude, Make_Phase
@@ -15,16 +16,16 @@ from Simulation.Scanning import Make_Scan_Positions
 from Analysis.Metrics import Reconstruction_Error, Align_Global_Phase, Consistency_Error
 from Simulation.Datasets import Simulate_Ptychography
 
+
 ########   Simulation parameters   ########
-#Select a random seed to create comparible results between runs
-np.random.seed(42)
+np.random.seed(420)
 
 #Total image size and internal object size
 N = 75               
 ObjectSize = 45       
 
 MicroscopeInstance = Microscope(
-    Wavelength=3.7E-12,
+    Wavelength=Voltage_To_Wavelength(100E3),
     PixelSize=1E-8,
     Distance=10,
     FocalLength=0.1,
