@@ -10,7 +10,7 @@ import matplotlib.pyplot as plt
 
 #Total image size
 N = 64           
-#Size of square Objectect at image center      
+#Size of square object at image center      
 Object_size = 20       
 
 #Create Objectect
