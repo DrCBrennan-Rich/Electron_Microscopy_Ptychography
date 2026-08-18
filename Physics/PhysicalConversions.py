@@ -3,13 +3,14 @@
 @author: cbrph
 """
 import numpy as np
-import matplotlib.pyplot as plt 
+import matplotlib.pyplot as plt
+from scipy import constants
 plt.rcParams.update({'font.size': 40})
 
-ElectronCharge = 1.60217663E-19 #Charge on the electron in Coulombs
-ElectronMass = 9.1093837E-31 #Mass of electron in kg
-SpeedOfLight = 299792458 #Speed of light in a vacuum
-PlankConstant = 6.62607015E-34 #Plank constant
+ElectronCharge = constants.e #Charge on the electron in Coulombs
+ElectronMass = constants.m_e #Mass of electron in kg
+SpeedOfLight = constants.c #Speed of light in a vacuum
+PlankConstant = constants.h #Plank constant
 
 def Voltage_To_Wavelength(Voltage, ReturnError = None):
     #Voltage in eV 
