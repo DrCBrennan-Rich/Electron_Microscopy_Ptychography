@@ -3,9 +3,7 @@
 @author: cbrph
 """
 import numpy as np
-import matplotlib.pyplot as plt
 from scipy import constants
-plt.rcParams.update({'font.size': 40})
 
 ElectronCharge = constants.e #Charge on the electron in Coulombs
 ElectronMass = constants.m_e #Mass of electron in kg
