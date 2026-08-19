@@ -3,8 +3,6 @@
 @author: cbrph
 """
 import numpy as np
-import matplotlib.pyplot as plt 
-plt.rcParams.update({'font.size': 40})
 
 from Physics.Microscope import MicroscopeForward
 from Simulation.Objects import  Extract_Object_Patch
@@ -44,24 +42,3 @@ def Simulate_Ptychography(Object, Probe, ScanPositions, MicroscopeInstance,
         DiffractionPatterns.append(Intensity)
 
     return np.array(DiffractionPatterns)
-
-'''
-def Make_Scan_Positions(ObjectSize, ProbeSize, Step, Jitter = 0):
-
-    ScanPositions = []
-
-    for x in range(0, ObjectSize-ProbeSize+1, Step):
-        for y in range(0, ObjectSize-ProbeSize+1, Step):
-            
-            #Create the jitter value centered on 0
-            JitterX = np.random.normal(0, Jitter)
-            JitterY = np.random.normal(0, Jitter)
-            
-            PositionX = x + JitterX
-            PositionY = y + JitterY
-            
-            ScanPositions.append((PositionX, PositionY))
-
-    return ScanPositions
-
-'''
