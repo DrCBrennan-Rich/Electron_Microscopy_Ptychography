@@ -10,8 +10,9 @@ from Physics.Microscope import MicroscopeForward
 from Simulation.Objects import  Extract_Object_Patch
 
 def Add_Poisson_Noise(Intensity, Dose):
+    #Insert Poisson statistics into the data to modify the original intensity
     
-    if Dose <= 0:
+    if Dose <= 0: #Check that the dose is positive
         raise ValueError("A dose must be positive.")
     
     ExpectedCounts = Dose*Intensity
