@@ -3,7 +3,6 @@
 @author: cbrph
 """
 import numpy as np
-
 from Physics.Microscope import MicroscopeForward
 from Simulation.Objects import  Extract_Object_Patch
 
