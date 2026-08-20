@@ -3,7 +3,6 @@
 @author: cbrph
 """
 import numpy as np
-
 from Physics.Microscope import MicroscopeForward
 
 def Make_Scan_Positions(ObjectSize, ProbeSize, Step, Jitter=0.0):
