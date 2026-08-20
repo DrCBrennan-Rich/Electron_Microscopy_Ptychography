@@ -3,8 +3,6 @@
 @author: cbrph
 """
 import numpy as np
-import matplotlib.pyplot as plt 
-plt.rcParams.update({'font.size': 40})
 from Physics import Propagation as Prg
 
 class Microscope:
