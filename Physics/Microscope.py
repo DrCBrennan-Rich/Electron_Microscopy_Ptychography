@@ -6,7 +6,7 @@ import numpy as np
 from Physics import Propagation as Prg
 
 class Microscope:
-
+#Define the microscope class containing all the features of the model microscope
     def __init__(
         self,
         Wavelength,
