@@ -3,8 +3,6 @@
 @author: cbrph
 """
 import numpy as np
-import matplotlib.pyplot as plt 
-plt.rcParams.update({'font.size': 40})
 from Physics.Microscope import MicroscopeForward, MicroscopeBackward
 from Analysis.Metrics import Reconstruction_Error, Consistency_Error
 from Simulation.Objects import  Extract_Object_Patch
